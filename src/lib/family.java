@@ -35,5 +35,9 @@ public class family {
 		childNames.add(childName);
 		childIdNumbers.add(childIdNumber);
 	}
+
+    public int getchildIdNumber(){
+        return childIdNumbers.size();
+    }
 	
 }
