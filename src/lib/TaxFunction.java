@@ -1,19 +1,12 @@
 package lib;
 
 public class TaxFunction {
+	final static double percentage = 0.05;
 	final static int maxNumberOfWorking = 12;
 	final static int maxNumberOfChildren = 3;
-	/**
-	 * Fungsi untuk menghitung jumlah pajak penghasilan pegawai yang harus dibayarkan setahun.
-	 * 
-	 * Pajak dihitung sebagai 5% dari penghasilan bersih tahunan (gaji dan pemasukan bulanan lainnya dikalikan jumlah bulan bekerja dikurangi pemotongan) dikurangi penghasilan tidak kena pajak.
-	 * 
-	 * Jika pegawai belum menikah dan belum punya anak maka penghasilan tidak kena pajaknya adalah Rp 54.000.000.
-	 * Jika pegawai sudah menikah maka penghasilan tidak kena pajaknya ditambah sebesar Rp 4.500.000.
-	 * Jika pegawai sudah memiliki anak maka penghasilan tidak kena pajaknya ditambah sebesar Rp 4.500.000 per anak sampai anak ketiga.
-	 * 
-	 */
-	
+	final static int deductionSingle = 54000000;
+	final static int deductionMarried = 4500000;
+	final static int deductionPerChild = 1500000;
 	
 	public static int calculateTax(int totalSalary, int numberOfMonthWorking, int deductible, boolean isMarried, int numberOfChildren) {
 		
@@ -22,9 +15,9 @@ public class TaxFunction {
 		validateInput(numberOfMonthWorking);
 		
 		if (isMarried) {
-			tax = (int) Math.round(0.05 * (totalSalary - deductible - (54000000 + 4500000 + (numberOfChildren * 1500000))));
+			tax = (int) Math.round(percentage * (totalSalary - deductible - (deductionSingle + deductionMarried + (numberOfChildren * deductionPerChild))));
 		}else {
-			tax = (int) Math.round(0.05 * (totalSalary - deductible - 54000000));
+			tax = (int) Math.round(percentage * (totalSalary - deductible - deductionSingle));
 		}
 		
 		if (tax < 0) {
