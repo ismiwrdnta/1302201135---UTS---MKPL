@@ -5,6 +5,18 @@ import java.time.Month;
 
 
 public class Employee {	
+	private person Person;
+	private family Family;
+	private salary Salary;
+	private dateWork WorkDate;
+	
+	public Employee(person person, family family, salary salary, dateWork WorkDate) {
+		this.Person = person;
+		this.Family = family;
+		this.Salary = salary;
+		this.WorkDate = WorkDate;
+	}
+
 	private int monthWorkingInYear;
 
 	public int getAnnualIncomeTax() {
@@ -12,12 +24,12 @@ public class Employee {
 		//Menghitung berapa lama pegawai bekerja dalam setahun ini, jika pegawai sudah bekerja dari tahun sebelumnya maka otomatis dianggap 12 bulan.
 		LocalDate date = LocalDate.now();
 		
-		if (date.getYear() == dateWork.getYear()){
-			monthWorkingInYear = date.getMonthValue() - dateJoin.getMonthValue();
+		if (date.getYear() == WorkDate.getYear()){
+			monthWorkingInYear = date.getMonthValue() - WorkDate.getMonth();
 		}else {
 			monthWorkingInYear = 12;
 		}
 		
-		return TaxFunction.calculateTax(monthlySalary, otherMonthlyIncome, monthWorkingInYear, annualDeductible, spouseIdNumber.equals(""), childIdNumbers.size());
+		return TaxFunction.calculateTax(Salary.getMonthlySalary(), Salary.getOtherMonthlyIncome(), monthWorkingInYear, Salary.getAnnualDeductible(), Family.getSpouseIdNumber().equals(""), Family.getchildIdNumber());
 	}
 }
