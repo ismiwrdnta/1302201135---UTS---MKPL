@@ -20,7 +20,7 @@ public class Employee {
 	private int monthWorkingInYear;
 
 	public int getAnnualIncomeTax() {
-		
+		int salaryTotal = 0;
 		//Menghitung berapa lama pegawai bekerja dalam setahun ini, jika pegawai sudah bekerja dari tahun sebelumnya maka otomatis dianggap 12 bulan.
 		LocalDate date = LocalDate.now();
 		
@@ -29,7 +29,9 @@ public class Employee {
 		}else {
 			monthWorkingInYear = 12;
 		}
+
+		salaryTotal = (Salary.getMonthlySalary() + Salary.getOtherMonthlyIncome())*monthWorkingInYear;
 		
-		return TaxFunction.calculateTax(Salary.getMonthlySalary(), Salary.getOtherMonthlyIncome(), monthWorkingInYear, Salary.getAnnualDeductible(), Family.getSpouseIdNumber().equals(""), Family.getchildIdNumber());
+		return TaxFunction.calculateTax(salaryTotal, monthWorkingInYear, Salary.getAnnualDeductible(), Family.getSpouseIdNumber().equals(""), Family.getchildIdNumber());
 	}
 }
