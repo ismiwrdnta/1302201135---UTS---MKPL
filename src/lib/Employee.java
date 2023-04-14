@@ -18,13 +18,11 @@ public class Employee {
 	private String idNumber;
 	private String address;
 	
-	private int yearJoined;
-	private int monthJoined;
-	private int dayJoined;
+	private LocalDate dateJoin;
 	private int monthWorkingInYear;
 	
 	private boolean isForeigner;
-	private Jgender gender; //true = Laki-laki, false = Perempuan
+	private Jgender gender; 
 	
 	private int monthlySalary;
 	private int otherMonthlyIncome;
@@ -36,15 +34,13 @@ public class Employee {
 	private List<String> childNames;
 	private List<String> childIdNumbers;
 	
-	public Employee(String employeeId, String firstName, String lastName, String idNumber, String address, int yearJoined, int monthJoined, int dayJoined, boolean isForeigner, Jgender gender) {
+	public Employee(String employeeId, String firstName, String lastName, String idNumber, String address, LocalDate dateJoin, boolean isForeigner, Jgender gender) {
 		this.employeeId = employeeId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.idNumber = idNumber;
 		this.address = address;
-		this.yearJoined = yearJoined;
-		this.monthJoined = monthJoined;
-		this.dayJoined = dayJoined;
+		this.dateJoin = dateJoin;
 		this.isForeigner = isForeigner;
 		this.gender = gender;
 		
@@ -99,8 +95,8 @@ public class Employee {
 		//Menghitung berapa lama pegawai bekerja dalam setahun ini, jika pegawai sudah bekerja dari tahun sebelumnya maka otomatis dianggap 12 bulan.
 		LocalDate date = LocalDate.now();
 		
-		if (date.getYear() == yearJoined) {
-			monthWorkingInYear = date.getMonthValue() - monthJoined;
+		if (date.getYear() == dateJoin.getYear()){
+			monthWorkingInYear = date.getMonthValue() - dateJoin.getMonthValue();
 		}else {
 			monthWorkingInYear = 12;
 		}
